@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <%- include("./partials/head") %>
+    <style>
+      .signup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .centered {
+        width: 30%;
+        height: 80%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include("./partials/nav") %>
+    
+    <!-- Updated form: note enctype and method -->
+    <form class="signup" method="POST" action="/user/signup" >
+      <div class="centered">
+        <img class="mb-4" src="#" alt="" width="72" height="57" />
+        <h1 class="h1 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="floatingName" placeholder="Name" name="name" required />
+          <label for="floatingName">Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="email" unique="true" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email" required />
+          <label for="floatingEmail">Email address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required />
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <!-- ✅ Role dropdown
+        <div class="form-floating mb-3">
+          <select class="form-select" id="floatingRole" name="role" required>
+            <option value="">-- Select Role --</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+          <label for="floatingRole">Role</label>
+        </div> -->
+
+        <!-- ✅ Profile Photo Upload
+        <div class="mb-3">
+          <label for="profilePhoto" class="form-label">Profile Photo</label>
+          <input class="form-control" type="file" id="profilePhoto" name="profileImage" accept="image/*" />
+        </div> -->
+
+        <div class="form-check text-start my-3">
+          <input class="form-check-input" type="checkbox" value="remember-me" id="checkDefault" />
+          <label class="form-check-label" for="checkDefault">Remember me</label>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-body-secondary">© 2024–2025</p>
+      </div>
+    </form>
+
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

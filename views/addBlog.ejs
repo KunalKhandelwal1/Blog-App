@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Blog</title>
+  </head>
+  <body>
+    <!-- navbar -->
+
+    <%- include("./partials/nav") %>
+
+    <!-- blog -->
+    <form method="post" action="/blog/add-blog" class="container" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="title"
+          name="title"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <input type="file" class="form-control" id="inputGroupFile02" name="imageURL" />
+        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Write Blog</label
+        >
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          name="body"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

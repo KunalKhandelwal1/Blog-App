@@ -31,6 +31,6 @@ app.use("/",staticRoute);
 app.use("/user",Router);
 app.use("/blog",blogRouter);
 
-app.listen(port,()=>{
-    console.log(`server is listening to the port ${port}`);
-})
+// app.listen(port,()=>{
+//     console.log(`server is listening to the port ${port}`);
+// })

@@ -34,3 +34,4 @@ app.use("/blog",blogRouter);
 // app.listen(port,()=>{
 //     console.log(`server is listening to the port ${port}`);
 // })
+export default app;

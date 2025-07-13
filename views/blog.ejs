@@ -12,70 +12,82 @@
 
     <div class="container col-xxl-8 px-4 py-2">
       <div class="row flex-lg-row-reverse align-items-center g-5 py-2">
-        <div >
+        <div>
           <img
-            src=" <%= entry.imageURL %>"
+            src="<%= entry.imageURL || '/default-blog.png' %>"
             class="d-block mx-lg-auto img-fluid"
             width="300"
             height="300"
             loading="lazy"
+            alt="Blog Image"
           />
         </div>
         <div class="text-center">
-  <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
-    <%= entry.title %> 
-    
-  </h1>
-  <div >
-      <img src="<%= entry.createdBy.profileImage %>" width="30px" style="border-radius: 50%;margin-right: 10px;" alt="">   <%= entry.createdBy.name %>
-    </div>
-  <p class="lead"><%= entry.body %></p>
-</div>
-    </div>
-<h1>Comments (<%= comm ? comm.length : 0 %>)</h1>
-
-<% if (comm && comm.length > 0) { %>
-  <% comm.forEach(comment => { %>
-    <div>
-      <img src="<%= comment.createdBy.profileImage %>" width="30px" style="border-radius: 50%; margin-right: 10px;" alt="">
-      <%= comment.createdBy.name %>
-      <pre><%= comment.content %></pre>
-    </div>
-  <% }) %>
-<% } else { %>
-  <p>No comments yet.</p>
-<% } %>
-
-
-<% if (locals.user) { %>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Click here to comment
-  </button>
-
-  <!-- pop up -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="/blog/comment/<%= entry._id %>">
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label">Comment:</label>
-              <textarea class="form-control" id="message-text" name="content"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Send comment</button>
-            </div>
-          </form>
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+            <%= entry.title %>
+          </h1>
+          <div>
+            <% if (entry.createdBy) { %>
+              <img src="<%= entry.createdBy.profileImage %>" width="30px" style="border-radius: 50%; margin-right: 10px;" alt="Author Image">
+              <%= entry.createdBy.name %>
+            <% } else { %>
+              <img src="/default-user.png" width="30px" style="border-radius: 50%; margin-right: 10px;" alt="Anonymous">
+              Anonymous
+            <% } %>
+          </div>
+          <p class="lead"><%= entry.body %></p>
         </div>
       </div>
+
+      <h1>Comments (<%= comm ? comm.length : 0 %>)</h1>
+
+      <% if (comm && comm.length > 0) { %>
+        <% comm.forEach(comment => { %>
+          <div>
+            <% if (comment.createdBy) { %>
+              <img src="<%= comment.createdBy.profileImage %>" width="30px" style="border-radius: 50%; margin-right: 10px;" alt="Commenter">
+              <%= comment.createdBy.name %>
+            <% } else { %>
+              <img src="/default-user.png" width="30px" style="border-radius: 50%; margin-right: 10px;" alt="Anonymous">
+              Anonymous
+            <% } %>
+            <pre><%= comment.content %></pre>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No comments yet.</p>
+      <% } %>
+
+      <% if (locals.user) { %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Click here to comment
+        </button>
+
+        <!-- Comment Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New Comment</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="/blog/comment/<%= entry._id %>">
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Comment:</label>
+                    <textarea class="form-control" id="message-text" name="content" required></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send comment</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
     </div>
-  </div>
-<% } %>
-    
+
     <%- include("./partials/scripts") %>
   </body>
 </html>
